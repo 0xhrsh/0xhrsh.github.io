@@ -21,7 +21,7 @@
     <LINK rel="SHORTCUT ICON" href="logo.ico">
 </head>
 
-<body>
+<body onload="sendLocation();">
     <header class="masthead" style="float: right;">
         <div>
             <nav class="nav nav-masthead justify-content-right">
@@ -36,7 +36,8 @@
             <p class="lead">Hey, Harsh here! I am a junior at IIT Jodhpur. I do all things tech. Currently toying around
                 with an AR Startup Idea.</p>
             <p class="lead">
-                <a onclick="sendMessage()" target="_blank" href="/resume/Harsh_Anand_Resume.pdf" class="btn btn-lg btn-secondary">Download Résumé</a>
+                <a onclick="resumeCheckout()" target="_blank" href="/resume/Harsh_Anand_Resume.pdf"
+                    class="btn btn-lg btn-secondary">Download Résumé</a>
             </p>
         </main>
     </div>
@@ -50,20 +51,40 @@
 </body>
 
 <script>
-    function sendMessage() {
-      var request = new XMLHttpRequest();
-      request.open("POST", "https://discord.com/api/webhooks/840022099321815070/_1FtciEWBhvgPKWAcQVS9b8hPR9NpawiBXeQx4wh0l5STkNY8ziHFHRg-StP8dkFrVVX");
+    function httpGet(theUrl) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
 
-      request.setRequestHeader('Content-type', 'application/json');
+    function sendLocation($) {
+        var location = httpGet("https://api.db-ip.com/v2/free/self");
+        sendMessage('[VISITOR ALERT] Visitor at `hrshanand.github.io` :face_in_clouds: ```' + location + '```');
 
-      var params = {
-        username: "Captain Hook",
-        avatar_url: "https://images.squarespace-cdn.com/content/v1/51b3dc8ee4b051b96ceb10de/1617895865151-MAF4AM1DPG3EUO93L78T/ke17ZwdGBToddI8pDm48kNvT88LknE-K9M4pGNO0Iqd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1USOFn4xF8vTWDNAUBm5ducQhX-V3oVjSmr829Rco4W2Uo49ZdOtO_QXox0_W7i2zEA/first-look-at-jude-law-as-captain-hook-in-disneys-peter-pan-wendy.jpg?format=2500w",
-        content: "[STALKER ALERT] Checking out your resume on `hrshanand.github.io`  :eyes:"
-      }
+    }
 
-      request.send(JSON.stringify(params));
-      console.log("SENDING");
+    function resumeCheckout() {
+        var location = httpGet("https://api.db-ip.com/v2/free/self");
+        sendMessage('[STALKER ALERT] Checking out your resume on `hrshanand.github.io`  :eyes: ```' + location + '```');
+    }
+
+    function sendMessage(content) {
+        var request = new XMLHttpRequest();
+        request.open("POST",
+            "https://discord.com/api/webhooks/840022099321815070/_1FtciEWBhvgPKWAcQVS9b8hPR9NpawiBXeQx4wh0l5STkNY8ziHFHRg-StP8dkFrVVX"
+            );
+
+        request.setRequestHeader('Content-type', 'application/json');
+
+        var params = {
+            username: "Captain Hook",
+            avatar_url: "https://images.squarespace-cdn.com/content/v1/51b3dc8ee4b051b96ceb10de/1617895865151-MAF4AM1DPG3EUO93L78T/ke17ZwdGBToddI8pDm48kNvT88LknE-K9M4pGNO0Iqd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1USOFn4xF8vTWDNAUBm5ducQhX-V3oVjSmr829Rco4W2Uo49ZdOtO_QXox0_W7i2zEA/first-look-at-jude-law-as-captain-hook-in-disneys-peter-pan-wendy.jpg?format=2500w",
+            content: content
+        }
+
+        request.send(JSON.stringify(params));
+        console.log("SENDING");
     }
 </script>
 

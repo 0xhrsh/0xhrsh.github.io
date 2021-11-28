@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="master.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <LINK rel="SHORTCUT ICON" href="logo.ico">
 </head>
 
@@ -27,6 +27,8 @@
             <nav class="nav nav-masthead justify-content-right">
                 <a class="nav-link active" href="/">Home</a>
                 <a class="nav-link" href="contact.html">Contact</a>
+                <a class="nav-link" href="https://app.ared.co.in" target="_blank">arEd <i
+                        class="fa fa-external-link"></i> </a>
             </nav>
         </div>
     </header>
@@ -43,7 +45,7 @@
     </div>
     <footer class="footer mt-auto" style="bottom: -25%;">
         <center>
-            <p>Designed with <i class="fas fa-heart"></i> by Harsh.</p>
+            <p>Designed with <i class="fa fa-heart"></i> by Harsh.</p>
             <img src="https://hitwebcounter.com/counter/counter.php?page=7812468&style=0007&nbdigits=5&type=page&initCount=0"
                 title="Free Counter" Alt="web counter" border="0" />
         </center>
@@ -61,7 +63,6 @@
     function sendLocation($) {
         var location = httpGet("https://api.db-ip.com/v2/free/self");
         sendMessage('[VISITOR ALERT] Visitor at `hrshanand.github.io` :face_in_clouds: ```' + location + '```');
-
     }
 
     function resumeCheckout() {
@@ -73,7 +74,7 @@
         var request = new XMLHttpRequest();
         request.open("POST",
             "https://discord.com/api/webhooks/840022099321815070/_1FtciEWBhvgPKWAcQVS9b8hPR9NpawiBXeQx4wh0l5STkNY8ziHFHRg-StP8dkFrVVX"
-            );
+        );
 
         request.setRequestHeader('Content-type', 'application/json');
 
@@ -84,7 +85,6 @@
         }
 
         request.send(JSON.stringify(params));
-        console.log("SENDING");
     }
 </script>
 

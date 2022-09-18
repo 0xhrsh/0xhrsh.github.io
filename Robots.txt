@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://hrshanand.github.io/sitemap.xml
+Sitemap: https://0xhrsh.com/sitemap.xml

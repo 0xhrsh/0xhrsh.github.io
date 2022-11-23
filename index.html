@@ -119,25 +119,25 @@
                 <div class="top-menu">
                     <ul>
                         <li class="active">
-                            <a href="#about-card">
+                            <a href="#about-card" onclick="clickEvent('click_about')">
                                 <span class="icon"><i class="fa fa-user"></i></span>
                                 <span class="link">About</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#resume-card">
+                            <a href="#resume-card" onclick="clickEvent('click_resume')">
                                 <span class="icon"><i class="fa fa-list"></i></span>
                                 <span class="link">Resume</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#works-card">
+                            <a href="#works-card" onclick="clickEvent('click_projects')">
                                 <span class="icon"><i class="fa fa-cogs"></i></span>
                                 <span class="link">Projects</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#contacts-card">
+                            <a href="#contacts-card" onclick="clickEvent('click_contact')">
                                 <span class="icon"><i class="fa fa-envelope"></i></span>
                                 <span class="link">Contact</span>
                             </a>
@@ -171,20 +171,21 @@
 
                     <!-- profile socials -->
                     <div class="social">
-                        <a target="_blank" href="mailto:yo@0xhrsh.com"><span class="fa fa-envelope"></span></a>
-                        <a target="_blank" href="https://www.linkedin.com/in/0xhrsh"><i class="fa fa-linkedin"></i></a>
-                        <a target="_blank" href="https://github.com/0xhrsh"><span class="fa fa-github"></span></a>
-                        <a target="_blank" href="https://twitter.com/0xhrsh"><span class="fa fa-twitter"></span></a>
+                        <a target="_blank" href="mailto:yo@0xhrsh.com" onclick="clickEvent('click_mail')"><span class="fa fa-envelope"></span></a>
+                        <a target="_blank" href="https://www.linkedin.com/in/0xhrsh" onclick="clickEvent('click_linkedin')"><i class="fa fa-linkedin"></i></a>
+                        <a target="_blank" href="https://github.com/0xhrsh" onclick="clickEvent('click_github')"><span class="fa fa-github"></span></a>
+                        <a target="_blank" href="https://twitter.com/0xhrsh" onclick="clickEvent('click_twitter')"><span class="fa fa-twitter"></span></a>
 
                     </div>
 
                     <!-- profile buttons -->
                     <div class="lnks">
-                        <a href="https://0xhrsh.com/resume/Harsh_Anand_Resume.pdf" target="_blank" class="lnk">
+                        <a href="https://0xhrsh.com/resume/Harsh_Anand_Resume.pdf" target="_blank" class="lnk"
+                            onclick="clickEvent('resume_download')">
                             <span class="text">Download CV</span>
                             <span class="ion"><i class="fa fa-download"></i></span>
                         </a>
-                        <a href="#" class="lnk discover">
+                        <a href="#" class="lnk discover" onclick="clickEvent('click_contact')">
                             <span class="text">Contact Me</span>
                             <span class="arrow"></span>
                         </a>
@@ -566,6 +567,12 @@
             }
 
             request.send(JSON.stringify(params))
+        }
+
+        function clickEvent(event) {
+            gtag('event', event, {
+                'event_name': event
+            });
         }
 
         const myForm = document.getElementById("cform");

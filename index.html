@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="css/basic.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/blogs.css" />
-    <link rel="stylesheet" href="css/ionicons.css" />
     <link rel="stylesheet" href="css/magnific-popup.css" />
     <link rel="stylesheet" href="css/animate.css" />
     <link rel="stylesheet" href="css/owl.carousel.css" />
@@ -72,7 +71,7 @@
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 </head>
 
-<body>
+<body onload="sendLocation()">
     <div id="plugin" style="
         position: fixed;
         width: fit-content;
@@ -520,24 +519,59 @@
 		jQuery Scripts
   -->
     <script>
-        const myForm = document.getElementById("cform");
 
+        function httpGet(theUrl) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", theUrl, false); // false for synchronous request
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+        }
+
+        function sendLocation($) {
+            var location = httpGet("https://api.db-ip.com/v2/free/self");
+            sendMessage('[VISITOR ALERT] Visitor at `0xhrsh.com` :face_in_clouds: ```' + location + '```');
+        }
+
+        function sendMessage(content, acknowledge = false, channel = 0) {
+            var request = new XMLHttpRequest();
+
+            if (acknowledge === true) {
+                request.onload = function () {
+                    if (this.status === 204) {
+                        $("#cform").fadeOut();
+                        $(".alert-success").delay(1000).fadeIn();
+                    }
+                    console.log(this.status);
+                };
+            }
+            var url = "https://discord.com/api/webhooks/1044996660104790116/lrm9f2JF9JQFclQiH8fhTP9tjUS8x9SiCwi2rA8foFLXt2YIhwGTuke-M2eeSE4AsAGQ";
+            if (channel === 1) {
+                url = "https://discord.com/api/webhooks/1044992912523538482/juGmgvUqNqwNVnvf4yl-tfbeQ9rx9X66XHXUxdAdZ1Tj7tKj2u0s8ilvBjB93QXmGcMD";
+            }
+            request.open("POST", url);
+
+            request.setRequestHeader('Content-type', 'application/json');
+
+            var params = {
+                username: "Captain Hook",
+                avatar_url: "https://images.squarespace-cdn.com/content/v1/51b3dc8ee4b051b96ceb10de/1617895865151-MAF4AM1DPG3EUO93L78T/ke17ZwdGBToddI8pDm48kNvT88LknE-K9M4pGNO0Iqd7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1USOFn4xF8vTWDNAUBm5ducQhX-V3oVjSmr829Rco4W2Uo49ZdOtO_QXox0_W7i2zEA/first-look-at-jude-law-as-captain-hook-in-disneys-peter-pan-wendy.jpg?format=2500w",
+                content: content
+            }
+
+            request.send(JSON.stringify(params))
+        }
+
+        const myForm = document.getElementById("cform");
         myForm.addEventListener("submit", (event) => {
             event.preventDefault();
 
             const formData = new FormData(myForm);
-
-            fetch("https://rahulgrover99.000webhostapp.com/form.php", {
-                method: "post",
-                body: formData,
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.response == 200) $("#cform").fadeOut();
-                    $(".alert-success").delay(1000).fadeIn();
-                });
+            // sendMessage('[MESSAGE ALERT] ' + formData.get('name') + '<' + formData.get('email') + '> :mailbox: ```' + formData.get('message') + '```', true, 1);
+            var location = httpGet("https://api.db-ip.com/v2/free/self");
+            sendMessage('[MESSAGE ALERT] ' + formData.get('name') + ' (' + formData.get('email') + ') :mailbox: ```' + formData.get('message') + '``` ```' + location + '``` cc:<@745343708936798319>', true, 1);
         });
     </script>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.validate.js"></script>
     <script src="js/jquery.magnific-popup.js"></script>

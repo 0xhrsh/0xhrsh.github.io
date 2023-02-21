@@ -7,7 +7,8 @@
 	Preloader
 */
 
-$(window).on("load", function () {
+// $(window).on("load", function () {
+$(document).ready(function () {
   var preload = $(".preloader");
   preload.find(".spinner").fadeOut(function () {
     preload.fadeOut();

@@ -360,8 +360,10 @@
                         <div class="row">
                             <div class="col col-d-12 col-t-12 col-m-12 border-line-v">
                                 <div class="contact_form">
-                                    <div style="margin-bottom: 15px;">
-                                        feel free to reach out!
+                                    <div id="formmesg" style="margin-bottom: 15px;">
+                                        the best way to reach out to me is via <a href="mailto:yo@0xhrsh.com">email <i
+                                                class="fa fa-external-link"></i></a>
+                                        <br> but you can also fill out this form:
                                     </div>
                                     <form id="cform" method="post">
                                         <div class="row">
@@ -390,6 +392,11 @@
                                     </form>
                                     <div class="alert-success">
                                         <p>thanks, your message is sent successfully! </p>
+                                    </div>
+                                    <div class="alert-failure">
+                                        <p>dang it! something is not working, just drop me an <a
+                                                href="mailto:yo@0xhrsh.com">email <i
+                                                    class="fa fa-external-link"></i></a></p>
                                     </div>
                                 </div>
                             </div>
@@ -423,14 +430,16 @@
     <script src="https://www.googletagmanager.com/gtag/js?id=G-2CLQKXSC17" defer></script>
     <script defer>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'G-2CLQKXSC17');
     </script>
 
     <script>
-
         function httpGet(theUrl) {
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("GET", theUrl, false); // false for synchronous request
@@ -443,10 +452,15 @@
 
             request.onload = function () {
                 if (this.status === 204) {
+                    $("#formmesg").fadeOut();
                     $("#cform").fadeOut();
                     $(".alert-success").delay(1000).fadeIn();
+                } else {
+                    console.log(this.status);
+                    $("#formmesg").fadeOut();
+                    $("#cform").fadeOut();
+                    $(".alert-failure").delay(1000).fadeIn();
                 }
-                console.log(this.status);
             };
 
             const url = "https://discord.com/api/webhooks/1085623673165205524/PsZ-tQQsXO0NVyBqRUO6CsbA-NkdoGT-kxShyyMR6jqHiWFRurz6L97Jl9dk2Y0aIQGz";
@@ -474,7 +488,9 @@
 
             const formData = new FormData(myForm);
             var location = httpGet("https://api.db-ip.com/v2/free/self");
-            sendMessage('[MESSAGE ALERT] ' + formData.get('name') + ' (' + formData.get('email') + ') :mailbox: ```' + formData.get('message') + '``` ```' + location + '``` cc:<@745343708936798319>');
+            sendMessage('[MESSAGE ALERT] ' + formData.get('name') + ' (' + formData.get('email') +
+                ') :mailbox: ```' + formData.get('message') + '``` ```' + location +
+                '``` cc:<@745343708936798319>');
         });
     </script>
 

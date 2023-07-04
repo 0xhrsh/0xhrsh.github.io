@@ -170,6 +170,11 @@ body {
 	font-size: 16px;
 }
 
+.row .col .col-6 {
+	width: 45%;
+}
+
+
 .row .col .col {
 	padding-top: 0;
 	padding-bottom: 20px;

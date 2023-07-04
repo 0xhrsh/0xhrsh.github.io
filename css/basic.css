@@ -39,6 +39,13 @@ body {
 	-webkit-text-size-adjust: 100%;
 }
 
+ul { margin-left: 15px; }
+
+li {
+    list-style-type: disc;
+    display: list-item;
+}
+
 .page {
 	position: absolute;
 	overflow: hidden;

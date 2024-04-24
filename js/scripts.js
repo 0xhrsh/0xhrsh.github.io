@@ -15,6 +15,18 @@ $(document).ready(function () {
     });
 });
 
+$(window).on("load", function () {
+    // Set a timeout to allow everything else to load.
+    setTimeout(function () {
+        var hash = window.location.hash;
+        if (hash) {
+            // Trigger the click event after a short delay.
+            $('.top-menu a[href="' + hash + '"]').trigger('click');
+        }
+    }, 500); // The delay in milliseconds. Adjust if necessary.
+});
+
+
 $(function () {
     "use strict";
 
